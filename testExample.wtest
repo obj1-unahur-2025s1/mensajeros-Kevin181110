@@ -6,4 +6,126 @@ describe "group of tests for pepita" {
     assert.equals(100, pepita.energy())
   }
 
+}object paquete{
+    var cantidad = 0
+    var destino = laMatrix
+    method estaPago()= cantidad >= 50
+    method pagar(unaCantidad){
+         cantidad = unaCantidad
+    }
+    method puedeEntregarse(unMensajero){
+        destino.dejaPasar(unMensajero) && self.estaPago
+    }
+    }
+object paquetonViajero{
+   
+   const destinos = []
+   method agregarDestino(unDestino){
+    destinos.add(unDestino)
+   }
+   method precio()= destinos.size() * 100
+   method estaPago()= importePagado mayor= self.precioTotal()
+   method pagar(importe){
+    importePagado = importePagado + importe
+   }
+ method puedeEntregarse(unMensajero){
+      self.estaPago() && destinos.all({destino =})
+ }
+ method puedePasarPorDestinos(unMensajero){
+    destinos.all({destino = destino.dejaPasar(unMensajero)})
+ }
+}
+object paquetito{
+    method estaPago()=  true
+    method puedeEntregarse(unMensajero){
+        return true
+    }
+}
+ object puenteDeBrooklyn{
+     method dejaPasar(unMensajero){
+        unMensajero.peso() <= 1000
+     }
+    }
+object laMatrix(){
+    method dejaPasar(unMensajero){
+        unMensajero.puedeLlamar()
+    }
+}
+object roberto{
+    var vehiculo = camion
+    method cambiarVehiculo(unVehiculo){
+        vehiculo = unVehiculo
+    }
+    method peso(){
+        return vehiculo.peso() + 90
+    }
+    method puedeLlamar()= false
+}
+object neo{
+    var tieneCredito = true
+    method cargarCredito(){
+        tieneCredito = true
+    }
+    method agotarCredito(){
+        tieneCredito = false
+    }
+    method peso()= 0
+    method puedeLlamar()= tieneCredito
+}
+object chuckNorris{
+    method peso()= 80
+    method puedeLlamar()= true
+}
+object bicicleta{
+   method peso()=5
+}
+object camion{
+   var cantAcoplados = 1
+   method cantAcoplados(unaCantidad){
+        cantAcoplados = unaCantidad
+   }
+   method peso()= cantAcoplados * 500
+}import mensajeros.*
+object empresa{
+    var mensajeros = []//<
+    //var setMensajeros = #{}
+    method mensajeros()= mensajeros
+    method contratar(unMensajero){
+        mensajeros.add(unMensajero)
+    }
+    method despedir(unMensajero){
+        mensajeros.remove(unMensajero)
+    }
+    method despedirATodos(){
+        mensajeros.removeAll()
+    }
+    method tieneMensajeriaGrande(){
+        return mensajeros.size() > 2
+    }
+    method puedeEntregarsePorElPrimero(unPaquete){
+       return unPaquete.puedeEntregarse(mensajeros.first())
+    }
+    method pesoDelUltimo(){
+        return mensajeros.last().peso()
+    }
+}import mensajeros1.*
+import empresas.*
+
+
+describe "group of tests for mensajeros" {
+  test "neo esta contratado" {
+     empresa.contratar(neo)
+    assert.that(empresa.mensajeros().contains(neo))
+  }
+  test "neo fue despedido"{
+    empresa.despedir(neo)
+    assert.notThat(empresa.mensajeros().contains(neo))
+  }
+  test "si agrego a chuck y roberto,la empresa es grande"{
+
+  }
+  test "neo puede entregar el paquete"{
+    paquete.pagar(50)
+
+  }
 }
